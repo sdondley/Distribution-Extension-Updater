@@ -1,0 +1,20 @@
+{
+   "license" : "Artistic-2.0",
+   "resources" : [],
+   "perl" : "6.d",
+   "build-depends" : [],
+   "version" : "0.0.1",
+   "tags" : [],
+   "provides" : {
+      "Distribution::Extension::Updater" : "lib/Distribution/Extension/Updater.rakumod"
+   },
+   "authors" : [
+      "Steve Dondley"
+   ],
+   "test-depends" : [],
+   "description" : "blah blah blah",
+   "auth" : "zef:sdondley",
+   "name" : "Distribution::Extension::Updater",
+   "depends" : [],
+   "source-url" : "https://github.com/sdondley/Distribution-Extension-Updater.git"
+}

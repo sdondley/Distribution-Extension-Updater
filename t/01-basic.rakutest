@@ -1,0 +1,6 @@
+use Test;
+use Distribution::Extension::Updater;
+
+pass "replace me";
+
+done-testing;

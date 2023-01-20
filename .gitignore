@@ -1,0 +1,5 @@
+.precomp/
+/Distribution-Extension-Updater-*
+*.iml
+*.idea
+
