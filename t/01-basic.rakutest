@@ -47,9 +47,6 @@ Directory.new('t/clean').empty-directory;
 Directory.new('t/dirty').empty-directory;
 Directory.new('t/dupes').empty-directory;
 
-say 'deleted';
-
-
 sub create-file(Str:D $name, Str:D $dir) {
     my $file = "t/$dir/$name";
     my $fh = $file.IO.open(:create);
