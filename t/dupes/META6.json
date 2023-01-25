@@ -15,8 +15,11 @@
   "build-depends": [],
   "test-depends": [],
   "provides": {
-    "Distribution::Extension::Updater": "lib/Distribution/Extension/Updater.rakumod"
+    "Distribution::Extension::Updater": "t/dirty/test5.pm",
+    "Distribution::Extension::Updater": "t/dirty/test4.pm6",
+    "Distribution::Extension::Updater": "t/dirty/test6.p6"
   },
+  "resources": [],
   "license": "Artistic-2.0",
   "tags": [],
   "source-url": "https://github.com/sdondley/Distribution-Extension-Updater.git"

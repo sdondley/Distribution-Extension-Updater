@@ -1,0 +1,33 @@
+#!/usr/bin/env raku
+use v6.d;
+use lib 'lib';
+use Distribution::Extension::Updater;
+
+sub MAIN(
+    Str $dir = '.',    #= the path to the directory you wish to upgrade
+    Bool :d(:$dry-run), #= show a report of legacy file extensions and do a dry run
+    Bool :q(:$quiet), #= do not show stdout, only errors
+    Bool :mods(:$modules) = True, #= update module files ('.pm', '.p6', or '.pm6' extensions)
+    Bool :docs(:$documentation) = True, #= update documentation files ('.pod6' or '.pod' extensions)
+    Bool :$tests = True,  #= update test files ('.t' extension)
+) {
+    my @ext = qw ( t pm pm6 p6 pod6 pod );
+    my $repo = Distribution::Extension::Updater.new($dir, :$quiet, :$dry-run);
+    if (!$tests) {
+        my $index = @ext.first('t', :k);
+        @ext.splice($index, 1);
+    }
+    if (!$documentation) {
+        my $index = @ext.first('pod6', :k);
+        @ext.splice($index, 2);
+    }
+    if (!$modules) {
+        my $index = @ext.first('pm', :k);
+        @ext.splice($index, 3);
+    }
+
+    die "No file extensions to update! Aborting!" if !@ext;
+    if !$quiet { say "Upgrading file with the following extensions: @ext[]"; }
+    if $dry-run { $repo.report();  }
+    $repo.update-extensions;
+}
