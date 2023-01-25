@@ -184,7 +184,7 @@ C<.precomp> directory.
 The module is designed to be run from the command line with the C<rdeu> command
 but also provides an API for running it from a script or other module.
 
-=head1 Command line operation
+=head1 COMMAND LINE OPERATION
 
 =head2 rdeu [ path/to/distro ]
 
