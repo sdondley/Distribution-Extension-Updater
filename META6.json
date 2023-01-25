@@ -1,25 +1,28 @@
 {
-  "name": "Distribution::Extension::Updater",
-  "description": "Update legacy file extensions in a Raku distribution.",
-  "version": "0.0.1",
-  "perl": "6.d",
+  "auth": "zef:sdondley",
   "authors": [
     "Steve Dondley"
   ],
-  "auth": "zef:sdondley",
+  "build-depends": [
+  ],
   "depends": [
     "File::Find",
     "Proc::Easier"
   ],
-  "build-depends": [],
-  "test-depends": [
-    "Directory"
-  ],
+  "description": "Update legacy file extensions in a Raku distribution.",
+  "license": "Artistic-2.0",
+  "name": "Distribution::Extension::Updater",
+  "perl": "6.d",
   "provides": {
     "Distribution::Extension::Updater": "lib/Distribution/Extension/Updater.rakumod"
   },
-  "resources": [],
-  "license": "Artistic-2.0",
-  "tags": [],
-  "source-url": "https://github.com/sdondley/Distribution-Extension-Updater.git"
+  "resources": [
+  ],
+  "source-url": "https://github.com/sdondley/Distribution-Extension-Updater.git",
+  "tags": [
+  ],
+  "test-depends": [
+    "Directory"
+  ],
+  "version": "0.0.2"
 }

@@ -1,6 +1,8 @@
 Revision history for Distribution-Extension-Updater
 
 {{$NEXT}}
+
+0.0.2  2023-01-25T09:54:11-05:00
     - push out correct branch
     - fix failing tests
 
