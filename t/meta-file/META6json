@@ -1,0 +1,26 @@
+{
+  "name": "Distribution::Extension::Updater",
+  "description": "blah blah blah",
+  "version": "0.0.1",
+  "perl": "6.d",
+  "authors": [
+    "Steve Dondley"
+  ],
+  "auth": "zef:sdondley",
+  "depends": [
+    "File::Find",
+    "Proc::Easier",
+    "META6"
+  ],
+  "build-depends": [],
+  "test-depends": [],
+  "provides": {
+    "Distribution::Extension::Updater": "t/dirty/test5.pm",
+    "Distribution::Extension::Updater": "t/dirty/test4.pm6",
+    "Distribution::Extension::Updater": "t/dirty/test6.p6"
+  },
+  "resources": [],
+  "license": "Artistic-2.0",
+  "tags": [],
+  "source-url": "https://github.com/sdondley/Distribution-Extension-Updater.git"
+}
