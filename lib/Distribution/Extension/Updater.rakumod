@@ -151,7 +151,7 @@ my $distro = Distribution::Extension::Updater.new('/path/to/dir');
 my $bool = $distro.has-legacy-extensions;
 $distro.report;
 
-# perform the upgrade on files with the etensions passed
+# perform the upgrade on files with the extensions passed
 $distro.update-extensions( <t p6 pm pm6 pod pod6> );
 
 =end code
