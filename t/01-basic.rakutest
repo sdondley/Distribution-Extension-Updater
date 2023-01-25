@@ -54,9 +54,12 @@ sub create-file(Str:D $name, Str:D $dir) {
 }
 
 sub setup() {
-    Directory.new('t/clean').mktree.empty-directory;
-    Directory.new('t/dirty').mktree.empty-directory;
-    Directory.new('t/dupes').mktree.empty-directory;
+    Directory.new('t/clean').mktree;
+    Directory.empty-directory;
+    Directory.new('t/dirty').mktree;
+    Directory.new('t/dirty').empty-directory;
+    Directory.new('t/dupes').mktree;
+    Directory.new('t/dupes').empty-directory;
     Directory.new('t/clean/.git').mktree;
     Directory.new('t/dirty/.git').mktree;
     Directory.new('t/dirty/.precomp').mktree;
