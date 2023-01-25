@@ -214,8 +214,6 @@ the updating of certain types of legacy extensions.
 =head5 C<--mods> turns off the updating of files with extension of C<.p6, .pm, .pm6>.
 =head5 C<--tests> turns off the updating of files with extension of C<.t>.
 =head5 C<--docs> turns off the updating of files with extension of C<.pod6, .pod>.
-rdeu --/tests         # don't upgrade test extensions
-rdeu --/mods          # don't update module extensions
 
 =head1 METHODS
 
