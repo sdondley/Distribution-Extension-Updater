@@ -6,7 +6,6 @@ plan 18;
 
 setup();
 
-
 my $distro;
 lives-ok { $distro = Distribution::Extension::Updater.new(); },
         'lives without argument passed';
@@ -54,12 +53,15 @@ sub create-file(Str:D $name, Str:D $dir) {
 }
 
 sub setup() {
-    Directory.new('t/clean').mktree;
-    Directory.empty-directory;
-    Directory.new('t/dirty').mktree;
-    Directory.new('t/dirty').empty-directory;
-    Directory.new('t/dupes').mktree;
-    Directory.new('t/dupes').empty-directory;
+    my $clean = Directory.new('t/clean');
+    $clean.mktree;
+    $clean.empty-directory;
+    my $dirty = Directory.new('t/dirty');
+    $dirty.mktree;
+    $dirty.empty-directory;
+    my $dupes = Directory.new('t/dupes');
+    $dupes.mktree;
+    $dupes.empty-directory;
     Directory.new('t/clean/.git').mktree;
     Directory.new('t/dirty/.git').mktree;
     Directory.new('t/dirty/.precomp').mktree;
