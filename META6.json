@@ -12,7 +12,9 @@
     "Proc::Easier"
   ],
   "build-depends": [],
-  "test-depends": [],
+  "test-depends": [
+    "Directory"
+  ],
   "provides": {
     "Distribution::Extension::Updater": "lib/Distribution/Extension/Updater.rakumod"
   },
