@@ -231,9 +231,10 @@ and whether changes to the distribution are actually made.
 
 =head2 Methods
 
-=head3 has-legacy-extensions
+=head3 has-legacy-extensions (*@exts where @exts ⊆ @valid-ext)
 
-Returns a boolean value C<True> if legacy extensions are found, C<False> otherwise.
+Returns a boolean value C<True> if any legacy extensions passed via @exts are found,
+C<False> otherwise. With no arguments, will search for all known legacy extensions.
 
 =head3 update-extensions( @exts );
 
