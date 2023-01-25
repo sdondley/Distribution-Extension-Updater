@@ -2,7 +2,7 @@ use Test;
 use Distribution::Extension::Updater;
 use Directory;
 
-plan 17;
+plan 18;
 
 setup();
 
@@ -10,7 +10,7 @@ setup();
 my $distro;
 lives-ok { $distro = Distribution::Extension::Updater.new(); },
         'lives without argument passed';
-#lives-ok { $distro.has-git }, 'detects if git installed';
+lives-ok { $distro.has-git }, 'detects if git installed';
 dies-ok { $distro = Distribution::Extension::Updater.new('fzlxxx')},
         'dies with bad path';
 lives-ok { $distro = Distribution::Extension::Updater.new(dir => 't/dirty')},
@@ -27,7 +27,6 @@ ok $distro.ext<pod>, 'finds pod files';
 ok $distro.ext<pm6>, 'finds pmy6 files';;
 ok $distro.ext<pm>, 'finds pm files';
 ok $distro.ext<p6>, 'finds p6 files';
-$distro.report;
 
 is True, $distro.has-legacy-extensions, 'reports has-legacy-extensions';
 is True, $distro.has-legacy-extensions('pod6'), 'reports has-legacy-extensions';
@@ -44,7 +43,12 @@ is False, $distro.has-legacy-extensions, 'reports no legacy extensions';
 $distro = Distribution::Extension::Updater.new(dir => 't/dupes');
 dies-ok { $distro.update-extensions }, 'stops if dupes will be created';
 
-#$distro.get-meta;
+Directory.new('t/clean').empty-directory;
+Directory.new('t/dirty').empty-directory;
+Directory.new('t/dupes').empty-directory;
+
+say 'deleted';
+
 
 sub create-file(Str:D $name, Str:D $dir) {
     my $file = "t/$dir/$name";
@@ -61,9 +65,9 @@ sub setup() {
     Directory.new('t/dirty/.precomp').mktree;
     Directory.new('t/dirty/resources').mktree;
     Directory.new('t/dupes/.git').mktree;
-    copy "t/meta-file/META6.json".IO, 't/dupes/META6.json'.IO;
-    copy "t/meta-file/META6.json".IO, 't/clean/META6.json'.IO;
-    copy "t/meta-file/META6.json".IO, 't/dirty/META6.json'.IO;
+    copy "t/meta-file/META6json".IO, 't/dupes/META.INFO'.IO;
+    copy "t/meta-file/META6json".IO, 't/clean/META.INFO'.IO;
+    copy "t/meta-file/META6json".IO, 't/dirty/META.INFO'.IO;
 
     create-file 'test1.t', 'dirty';
     create-file 'test2.pod6', 'dirty';
