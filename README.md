@@ -29,7 +29,7 @@ my $distro = Distribution::Extension::Updater.new('/path/to/dir');
 my $bool = $distro.has-legacy-extensions;
 $distro.report;
 
-# perform the upgrade on files with the etensions passed
+# perform the upgrade on files with the extensions passed
 $distro.update-extensions( <t p6 pm pm6 pod pod6> );
 ```
 
@@ -54,7 +54,7 @@ The module does not update files located in the `resources` directory or the `.p
 
 The module is designed to be run from the command line with the `rdeu` command but also provides an API for running it from a script or other module.
 
-Command line operation
+COMMAND LINE OPERATION
 ======================
 
 rdeu [ path/to/distro ]
@@ -84,10 +84,10 @@ These three options can be used alone or in combination, can be used to prevent 
 
 ##### `--tests` turns off the updating of files with extension of `.t`.
 
-##### `--docs` turns off the updating of files with extension of `.pod6, .pod`. rdeu --/tests # don't upgrade test extensions rdeu --/mods # don't update module extensions
+##### `--docs` turns off the updating of files with extension of `.pod6, .pod`.
 
-METHODS
-=======
+OBJECT CONSTRUCTION AND METHODS
+===============================
 
 As mentioned, the module can also be used from within Raku code using the following methods.
 
@@ -96,22 +96,22 @@ Construction
 
 ### new(Str $d = '', :d(:$dir) = $d || '.', Bool :$quiet = False, Bool :$dry-run = False, *%_ ())
 
-Creates a new D::E::U object. If no directory is provided either with a positional argument or a named argument, defaults to the current directly, '.'. Boolean arguments, `:quiet` and `:dry-run` determine whether output messages are printed and whether changes are made.
+Creates a new D::E::U object. If no directory is provided either with a positional argument or a named argument, defaults to the current directly, '.'. Boolean arguments, `:quiet` and `:dry-run` determine whether output messages are printed and whether changes to the distribution are actually made.
 
 Methods
 -------
 
-### has-legacy-extensions
+### has-legacy-extensions (*@exts where @exts ⊆ @valid-ext)
 
-Returns a boolean value `True` if legacy extensions are found, `False` otherwise.
+Returns a boolean value `True` if any legacy extensions passed via @exts are found, `False` otherwise. With no arguments, will search for all known legacy extensions.
 
 ### update-extensions( @exts );
 
-Perform the upgrade on files with the extensions passed in `@exts`. Only `.p6`, `.pm`, `.pm6`, `.t`, `.pod` and `.pod6` extensions are allowed.
+Perform the upgrade on files with the extensions passed in `@exts`. Only `.p6`, `.pm`, `.pm6`, `.t`, `.pod` and `.pod6` extensions are permitted.
 
 ### report
 
-Get a simple report of legacy extensions found.
+Get a simple report that counts the number of files found for each legacy extensions.
 
 ### get-meta
 
