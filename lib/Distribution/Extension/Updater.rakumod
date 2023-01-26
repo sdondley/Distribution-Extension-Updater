@@ -151,7 +151,7 @@ my $distro = Distribution::Extension::Updater.new('/path/to/dir');
 my $bool = $distro.has-legacy-extensions;
 $distro.report;
 
-# perform the upgrade on files with the etensions passed
+# perform the upgrade on files with the extensions passed
 $distro.update-extensions( <t p6 pm pm6 pod pod6> );
 
 =end code
@@ -184,7 +184,7 @@ C<.precomp> directory.
 The module is designed to be run from the command line with the C<rdeu> command
 but also provides an API for running it from a script or other module.
 
-=head1 Command line operation
+=head1 COMMAND LINE OPERATION
 
 =head2 rdeu [ path/to/distro ]
 
@@ -214,10 +214,8 @@ the updating of certain types of legacy extensions.
 =head5 C<--mods> turns off the updating of files with extension of C<.p6, .pm, .pm6>.
 =head5 C<--tests> turns off the updating of files with extension of C<.t>.
 =head5 C<--docs> turns off the updating of files with extension of C<.pod6, .pod>.
-rdeu --/tests         # don't upgrade test extensions
-rdeu --/mods          # don't update module extensions
 
-=head1 METHODS
+=head1 OBJECT CONSTRUCTION AND METHODS
 
 As mentioned, the module can also be used from within Raku code using the following
 methods.
@@ -229,22 +227,23 @@ methods.
 Creates a new D::E::U object. If no directory is provided either with a positional
 argument or a named argument, defaults to the current directly, '.'. Boolean
 arguments, C<:quiet> and C<:dry-run> determine whether output messages are printed
-and whether changes are made.
+and whether changes to the distribution are actually made.
 
 =head2 Methods
 
-=head3 has-legacy-extensions
+=head3 has-legacy-extensions (*@exts where @exts ⊆ @valid-ext)
 
-Returns a boolean value C<True> if legacy extensions are found, C<False> otherwise.
+Returns a boolean value C<True> if any legacy extensions passed via @exts are found,
+C<False> otherwise. With no arguments, will search for all known legacy extensions.
 
 =head3 update-extensions( @exts );
 
 Perform the upgrade on files with the extensions passed in C<@exts>. Only
-C<.p6>, C<.pm>, C<.pm6>, C<.t>, C<.pod> and C<.pod6> extensions are allowed.
+C<.p6>, C<.pm>, C<.pm6>, C<.t>, C<.pod> and C<.pod6> extensions are permitted.
 
 =head3 report
 
-Get a simple report of legacy extensions found.
+Get a simple report that counts the number of files found for each legacy extensions.
 
 =head3 get-meta
 

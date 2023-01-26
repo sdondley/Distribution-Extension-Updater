@@ -9,12 +9,31 @@ on:
   pull_request:
 
 jobs:
-  raku:
+  raku_nix:
     strategy:
       matrix:
         os:
           - ubuntu-latest
           - macos-latest
+        raku-version:
+          - 'latest'
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: Raku/setup-raku@v1
+        with:
+          raku-version: ${{ matrix.raku-version }}
+      - name: Install Dependencies
+        run: zef install --/test --test-depends --deps-only .
+      - name: Install App::Prove6
+        run: zef install --verbose --/test App::Prove6
+      - name: Run Tests
+        run: raku -I.,lib t/01-basic.rakutest
+
+  raku_win:
+    strategy:
+      matrix:
+        os:
           - windows-latest
         raku-version:
           - '2022.07'
@@ -27,6 +46,6 @@ jobs:
       - name: Install Dependencies
         run: zef install --/test --test-depends --deps-only .
       - name: Install App::Prove6
-        run: zef install --/test App::Prove6
+        run: zef install --verbose --/test App::Prove6
       - name: Run Tests
-        run: prove6 -I. t
+        run: raku -I.,lib t/01-basic.rakutest
