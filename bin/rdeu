@@ -7,12 +7,17 @@ sub MAIN(
     Str $dir = '.',    #= the path to the directory you wish to upgrade
     Bool :d(:$dry-run), #= show a report of legacy file extensions and do a dry run
     Bool :q(:$quiet), #= do not show stdout, only errors
-    Bool :mods(:$modules) = True, #= update module files ('.pm', '.p6', or '.pm6' extensions)
+    Bool :scripts = True,  #= update script files ('.p6' extension)
+    Bool :mods(:$modules) = True, #= update module files ('.pm' or '.pm6' extensions)
     Bool :docs(:$documentation) = True, #= update documentation files ('.pod6' or '.pod' extensions)
     Bool :$tests = True,  #= update test files ('.t' extension)
 ) {
     my @ext = qw ( t pm pm6 p6 pod6 pod );
     my $repo = Distribution::Extension::Updater.new($dir, :$quiet, :$dry-run);
+    if (!scripts) {
+        my $index = @ext.first('p6', :k);
+        @ext.splice($index, 1);
+    }
     if (!$tests) {
         my $index = @ext.first('t', :k);
         @ext.splice($index, 1);

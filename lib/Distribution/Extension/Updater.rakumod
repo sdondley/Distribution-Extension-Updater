@@ -9,7 +9,7 @@ has %.ext;
 
 my @ext = qw ( t pm pm6 p6 pod6 pod );
 my %ext-updates = (t => 'rakutest', pm => 'rakumod', pm6 => 'rakumod',
-                   p6 => 'rakumod', pod6 => 'rakudoc', pod => 'rakudoc');
+                   p6 => 'raku', pod6 => 'rakudoc', pod => 'rakudoc');
 
 method new(Str $d = '', :d(:$dir) = $d || '.', Bool :$quiet = False, Bool :$dry-run = False,  *%_ ()) {
     self.bless(dir => $dir.IO, :$quiet, :$dry-run);
@@ -138,6 +138,7 @@ rdeu [ '/path/to/distro' ]
 # do a dry run, don't change anything
 rdeu -d
 
+rdeu --/scripts       # don't upgrade script extensions
 rdeu --/tests         # don't upgrade test extensions
 rdeu --/mods          # don't update module extensions
 rdeu --/tests --/docs # don't update tests or docs
@@ -162,7 +163,8 @@ Distribution::Extension::Updater searches a distribution on a local machine
 for legacy Perl 6 file extensions and updates them to the newer Raku extensions.
 The following file types and extensions can be updated:
 
-=item modules with C<.pm>, C<.p6>, and C<.pm6> extensions
+=item scripts with the C<.p6>
+=item modules with C<.pm> and C<.pm6> extensions
 =item documentation with C<.pod> and C<.pod6> extensions
 =item tests with the C<.t> extension
 
@@ -206,12 +208,13 @@ Suppresses messages to standard output. Warnings will still be printed.
 
 Provides help for the C<rdeu> command.
 
-=head4 --/mods|modules --/documentation|docs --/tests
+=head4 --/scripts --/mods|modules --/documentation|docs --/tests
 
 These three options can be used alone or in combination, can be used to prevent
 the updating of certain types of legacy extensions.
 
-=head5 C<--mods> turns off the updating of files with extension of C<.p6, .pm, .pm6>.
+=head5 C<--scripts> turns off the updating of files with extension of C<.p6>. 
+=head5 C<--mods> turns off the updating of files with extension of C<.pm, .pm6>.
 =head5 C<--tests> turns off the updating of files with extension of C<.t>.
 =head5 C<--docs> turns off the updating of files with extension of C<.pod6, .pod>.
 
