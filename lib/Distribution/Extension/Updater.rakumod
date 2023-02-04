@@ -37,7 +37,7 @@ method update-extensions(*@exts where @exts ⊆ @ext) {
     my %updates;
     for @exts || @ext {
         my $new-extension = '.' ~ %ext-updates{$_};
-        for %.ext{$_} -> $file {
+        for %.ext{$_}[] -> $file {
             my $new-file = $file.subst(/\. $_ $/, $new-extension);
             die "Cannot proceed. Duplicate '$new-file' files will be created." if %updates{$new-file};
             %updates{$new-file} = $file if $file;
@@ -48,8 +48,8 @@ method update-extensions(*@exts where @exts ⊆ @ext) {
     my $has-git = self.has-git();
     my $updates-made = False;
     my $meta-content = slurp $!meta.Str;
-    $meta-content ~~ /('"provides"' ':' \s* '{' \s* ('"' .*? '"' \s* ':' \s* '"' .*? '"' \s* ','? \s*)+ '}')/;
-    my $provides = $0.Str;
+    $meta-content ~~ /'"provides"' \s* ':' \s* '{' \s* ['"' .*? '"' \s* ':' \s* '"' .*? '"' \s* ','? \s*]+ '}'/;
+    my $provides = $/.Str;
     my $new-provides = $provides;
     for %updates.keys -> $k {
         my $search = %updates{$k}.Str;
