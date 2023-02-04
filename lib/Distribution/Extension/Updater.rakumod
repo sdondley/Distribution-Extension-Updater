@@ -48,8 +48,8 @@ method update-extensions(*@exts where @exts ⊆ @ext) {
     my $has-git = self.has-git();
     my $updates-made = False;
     my $meta-content = slurp $!meta.Str;
-    $meta-content ~~ /('"provides"' ':' \s* '{' \s* ('"' .*? '"' \s* ':' \s* '"' .*? '"' \s* ','? \s*)+ '}')/;
-    my $provides = $0.Str;
+    $meta-content ~~ /'"provides"' \s* ':' \s* '{' \s* ['"' .*? '"' \s* ':' \s* '"' .*? '"' \s* ','? \s*]+ '}'/;
+    my $provides = $/.Str;
     my $new-provides = $provides;
     for %updates.keys -> $k {
         my $search = %updates{$k}.Str;
