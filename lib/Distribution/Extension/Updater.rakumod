@@ -37,7 +37,7 @@ method update-extensions(*@exts where @exts ⊆ @ext) {
     my %updates;
     for @exts || @ext {
         my $new-extension = '.' ~ %ext-updates{$_};
-        for %.ext{$_} -> $file {
+        for %.ext{$_}[] -> $file {
             my $new-file = $file.subst(/\. $_ $/, $new-extension);
             die "Cannot proceed. Duplicate '$new-file' files will be created." if %updates{$new-file};
             %updates{$new-file} = $file if $file;
